@@ -50,6 +50,7 @@ public class main {
         app.setEstrategiaBusqueda(binaria);
         System.out.println(app.buscarProductos(2, "Pluma"));
         
+        //Probando burstSort
         app.ordenarProductos(4);
         System.out.println(app.toString());
         System.out.println(app.buscarProductos(4, 1450000));
