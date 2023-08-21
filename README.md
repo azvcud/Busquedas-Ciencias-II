@@ -28,4 +28,6 @@ Este repositorio contiene el código fuente del primer reto en la asignatura de 
 Se utiliza el patrón de diseño **Estrategia** para la implementación de las búsquedas, lo que permite cambiar fácilmente el algoritmo de búsqueda utilizado en tiempo de ejecución.
 Además de las búsquedas, este proyecto contiene una implementación de algoritmos de ordenamiento usando el mismo patrón de diseño. Actualmente, solo se ha implementado el algoritmo de ordenamiento **BurstSort**.
 
+Se añade un documento Enterprise como documento de diseño de software de la aplicación.
+
 ---
