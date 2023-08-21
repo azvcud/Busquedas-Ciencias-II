@@ -1,7 +1,7 @@
-### Universidad Distrital Francisco José de Caldas ###
+# Universidad Distrital Francisco José de Caldas #
 ## Proyecto Curricular de Ingeniería de Sistemas ##
 
-## Ciencias de la Computación II ##
+### Ciencias de la Computación II ###
 Santiago Salazar Fajardo
 
 
