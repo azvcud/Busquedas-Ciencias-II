@@ -17,15 +17,19 @@ public class BusquedaTransformacionClaves implements Busqueda {
     public ArrayList<Producto> buscar(ArrayList<Producto> listaProductos, int opcion, Object atributo) {
         ArrayList<Producto> productosEncontrados = new ArrayList<>();
         Producto productoSeleccionado;
+        boolean productoExistente = true;
+        
         int indice = hashAtributo(atributo, opcion, listaProductos.size());
+        int inicio = indice;
         
         do {
             productoSeleccionado = listaProductos.get(indice);
             if(indice == (listaProductos.size() - 1)) { indice = 0; }
             else                                      { indice = indice + 1; }
+            if(inicio == indice)                      { productoExistente = false; break; }
         } while(comparar(productoSeleccionado, opcion, atributo) == false);
        
-        productosEncontrados.add(productoSeleccionado);
+        if(productoExistente) { productosEncontrados.add(productoSeleccionado); }
         
         return productosEncontrados;
     }
