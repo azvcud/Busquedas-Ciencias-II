@@ -1,22 +1,31 @@
-# Universidad Distrital Francisco José de Caldas #
-## Proyecto Curricular de Ingeniería de Sistemas ##
+# Reto de Ciencias de la Computación II - Algoritmos de Búsqueda
 
-### Ciencias de la Computación II ###
-Santiago Salazar Fajardo
+Universidad Distrital Francisco José de Caldas  
+Proyecto Curricular de Ingeniería de Sistemas
 
+**Asignatura:** Ciencias de la Computación II  
+**Profesor:** Santiago Salazar Fajardo
 
-Primer reto de Ciencias de la Computación II
-* Amir Zoleyt Vanegas Cárdenas - 20211020015
-* Adrián Stiven Olmos Ardila   - 
+---
 
+## Integrantes
 
-Se busca aplicar tres búsquedas a una lista de productos, las cuales son:
-* -Búsqueda Secuencial
-* -Búsqueda Binaria
-* -Búsqueda por transformación de claves
+- Amir Zoleyt Vanegas Cárdenas - 20211020015
+- Adrián Stiven Olmos Ardila   - 20189823408
 
-Por lo mismo, se hace el uso del patrón de diseño Estrategia para las búsquedas, y además
-también se aplica el mismo para los ordenamientos. Únicamente está programado el ordenamiento
-BurstSort
+---
 
+## Descripción
 
+Este repositorio contiene el código fuente del primer reto en la asignatura de Ciencias de la Computación II, enfocado en el tema de los algoritmos de búsqueda. El objetivo principal es aplicar tres tipos de algoritmos de búsqueda a una lista de productos, los cuales son:
+
+1. **Búsqueda Secuencial**
+
+2. **Búsqueda Binaria**
+
+3. **Búsqueda por Transformación de Claves**
+
+Se utiliza el patrón de diseño **Estrategia** para la implementación de las búsquedas, lo que permite cambiar fácilmente el algoritmo de búsqueda utilizado en tiempo de ejecución.
+Además de las búsquedas, este proyecto contiene una implementación de algoritmos de ordenamiento usando el mismo patrón de diseño. Actualmente, solo se ha implementado el algoritmo de ordenamiento **BurstSort**.
+
+---
