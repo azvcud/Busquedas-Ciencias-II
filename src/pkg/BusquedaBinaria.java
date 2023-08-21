@@ -42,7 +42,7 @@ public class BusquedaBinaria implements Busqueda {
         return switch (opcion) {
             case 1 -> productoSeleccionado.getId() == ((int)atributo);
             case 2 -> productoSeleccionado.getNombre().equals((String)atributo);
-            case 4 -> productoSeleccionado.getPrecio() == ((float)((int) atributo));
+            case 4 -> productoSeleccionado.getPrecio() == ((int) atributo);
             default -> false;
         };
     }
@@ -51,7 +51,7 @@ public class BusquedaBinaria implements Busqueda {
         return switch (opcion) {
             case 1 -> productoSeleccionado.getId() > ((int)atributo);
             case 2 -> (productoSeleccionado.getNombre().compareTo((String)atributo)) > 0;
-            case 4 -> productoSeleccionado.getPrecio() > ((float)((int) atributo));
+            case 4 -> productoSeleccionado.getPrecio() > ((int) atributo);
             default -> false;
         };
     }

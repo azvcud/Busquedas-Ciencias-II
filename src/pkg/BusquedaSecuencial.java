@@ -32,7 +32,7 @@ public class BusquedaSecuencial implements Busqueda {
             case 1 -> productoSeleccionado.getId() == ((int)atributo);
             case 2 -> productoSeleccionado.getNombre().equals((String)atributo);
             case 3 -> productoSeleccionado.getDescripcion().contains((String) atributo);
-            case 4 -> productoSeleccionado.getPrecio() == ((float)((int) atributo));
+            case 4 -> productoSeleccionado.getPrecio() == ((int) atributo);
             default -> false;
         };
     }

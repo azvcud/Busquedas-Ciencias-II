@@ -5,6 +5,8 @@
 package pkg;
 
 import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author amirz
@@ -13,7 +15,35 @@ public class BusquedaTransformacionClaves implements Busqueda {
 
     @Override
     public ArrayList<Producto> buscar(ArrayList<Producto> listaProductos, int opcion, Object atributo) {
-        return null;
+        ArrayList<Producto> productosEncontrados = new ArrayList<>();
+        Producto productoSeleccionado;
+        int indice = hashAtributo(atributo, opcion, listaProductos.size());
+        
+        do {
+            productoSeleccionado = listaProductos.get(indice);
+            if(indice == (listaProductos.size() - 1)) { indice = 0; }
+            else                                      { indice = indice + 1; }
+        } while(comparar(productoSeleccionado, opcion, atributo) == false);
+       
+        productosEncontrados.add(productoSeleccionado);
+        
+        return productosEncontrados;
     }
     
+    private int hashAtributo(Object atributo, int opcion, int magnitud) {
+        return switch (opcion) {
+            case 1, 4 -> ((int)atributo) % magnitud;
+            case 2 -> Math.abs(atributo.hashCode()) % magnitud;
+            default -> -1;
+        };
+    }
+    
+    private boolean comparar(Producto productoSeleccionado, int opcion, Object atributo) {
+        return switch (opcion) {
+            case 1 -> productoSeleccionado.getId() == ((int)atributo);
+            case 2 -> productoSeleccionado.getNombre().equals((String)atributo);
+            case 4 -> productoSeleccionado.getPrecio() == ((int) atributo);
+            default -> false;
+        };
+    }
 }

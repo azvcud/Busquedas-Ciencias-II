@@ -19,6 +19,7 @@ public class main {
         Busqueda binaria = new BusquedaSecuencial();
         Busqueda transformacionClaves = new BusquedaTransformacionClaves();
         Ordenamiento burstSort = new BurstSort();
+        Ordenamiento hash = new TablaHash();
         
         Producto producto1 = new Producto("Zumo de Naranja", "Esta vaina es de los dioses.", 4500);
         Producto producto2 = new Producto("Papas BBQ", "El picor es excelente.", 1800);
@@ -33,6 +34,7 @@ public class main {
         app.insertarProducto(producto4);
         app.insertarProducto(producto5);
         app.insertarProducto(producto6);
+        
         
         //Probando secuencial
         app.setEstrategiaBusqueda(secuencial);
@@ -54,6 +56,15 @@ public class main {
         app.ordenarProductos(4);
         System.out.println(app.toString());
         System.out.println(app.buscarProductos(4, 1450000));
+        
+
+        //Probando hashing
+        System.out.println("REVISION:\n");
+        app.setEstrategiaBusqueda(transformacionClaves);
+        app.setEstrategiaOrdenamiento(hash);
+        app.ordenarProductos(2);
+        System.out.println(app.toString());
+        app.buscarProductos(2, "Papas BBQ");
     }
     
 }
