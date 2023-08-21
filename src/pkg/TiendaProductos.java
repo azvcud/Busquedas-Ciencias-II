@@ -40,7 +40,7 @@ public class TiendaProductos {
     
     private String enlistar(ArrayList<Producto> listaProductos) {
         String lista = "";
-
+        
         for(int i = 0; i < listaProductos.size(); i++) {
             lista = lista + listaProductos.get(i).toString();
         }

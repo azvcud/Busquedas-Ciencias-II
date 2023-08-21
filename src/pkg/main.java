@@ -35,11 +35,10 @@ public class main {
         app.insertarProducto(producto5);
         app.insertarProducto(producto6);
         
-        
         //Probando secuencial
         app.setEstrategiaBusqueda(secuencial);
-        //System.out.println(app.toString());
-        //System.out.println(app.buscarProductos(4, 24500));
+        System.out.println(app.toString());
+        System.out.println(app.buscarProductos(4, 24500));
         //app.eliminarProductos(4, 24500);
         
         //Probando BurstSort
@@ -51,20 +50,13 @@ public class main {
         //Probando binaria
         app.setEstrategiaBusqueda(binaria);
         System.out.println(app.buscarProductos(2, "Pluma"));
-        
-        //Probando burstSort
-        app.ordenarProductos(4);
-        System.out.println(app.toString());
-        System.out.println(app.buscarProductos(4, 1450000));
-        
 
         //Probando hashing
-        System.out.println("REVISION:\n");
         app.setEstrategiaBusqueda(transformacionClaves);
         app.setEstrategiaOrdenamiento(hash);
         app.ordenarProductos(2);
         System.out.println(app.toString());
-        app.buscarProductos(2, "Papas BBQ");
+        System.out.println(app.buscarProductos(2, "Papas BBQ"));
     }
     
 }
