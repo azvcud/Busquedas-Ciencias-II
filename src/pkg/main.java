@@ -14,6 +14,9 @@ public class main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        VentanaPrincipal ventana = new VentanaPrincipal();
+        ventana.setVisible(true);
+        
         TiendaProductos app = new TiendaProductos();
         Busqueda secuencial = new BusquedaSecuencial();
         Busqueda binaria = new BusquedaSecuencial();
