@@ -118,11 +118,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Busqueda Binaria"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBinariaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnSecuencial">
       <Properties>
         <Property name="text" type="java.lang.String" value="Busqueda Secuencial"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSecuencialActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnTransformacion">
       <Properties>
@@ -136,6 +142,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Eliminar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="java.awt.Label" name="label1">
       <Properties>

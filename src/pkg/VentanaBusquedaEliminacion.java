@@ -5,7 +5,8 @@ package pkg;
  * @author Shiro
  */
 public class VentanaBusquedaEliminacion extends javax.swing.JFrame {
-
+    TiendaProductos app = new TiendaProductos();
+    
     public VentanaBusquedaEliminacion() {
         initComponents();
     }
@@ -36,8 +37,18 @@ public class VentanaBusquedaEliminacion extends javax.swing.JFrame {
         setTitle("Algoritmos de Busqueda - Ciencias ll (Buscar o Eliminar Productos)");
 
         btnBinaria.setText("Busqueda Binaria");
+        btnBinaria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBinariaActionPerformed(evt);
+            }
+        });
 
         btnSecuencial.setText("Busqueda Secuencial");
+        btnSecuencial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSecuencialActionPerformed(evt);
+            }
+        });
 
         btnTransformacion.setText("Busqueda Transformación de claves");
         btnTransformacion.addActionListener(new java.awt.event.ActionListener() {
@@ -47,6 +58,11 @@ public class VentanaBusquedaEliminacion extends javax.swing.JFrame {
         });
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         label1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         label1.setText("Busqueda y Eliminación");
@@ -169,7 +185,18 @@ public class VentanaBusquedaEliminacion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTransformacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransformacionActionPerformed
-        // TODO add your handling code here:
+        Busqueda claves = new BusquedaTransformacionClaves();
+        int opcion = 0;
+        if(chkId.isSelected()){opcion = 1;
+        }else if(chkNombre.isSelected()){ opcion = 2;
+        }else if(chkPrecio.isSelected()){ opcion = 4;
+        }
+        Ordenamiento tablaHash = new TablaHash();
+        app.setEstrategiaOrdenamiento(tablaHash);
+        app.ordenarProductos(opcion);
+        app.setEstrategiaBusqueda(claves);
+        //taProductoBuscado.setText(app.buscarProductos(opcion, tfParametro.getText()));
+        tfParametro.setText("");
     }//GEN-LAST:event_btnTransformacionActionPerformed
 
     private void chkIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkIdActionPerformed
@@ -182,9 +209,55 @@ public class VentanaBusquedaEliminacion extends javax.swing.JFrame {
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         VentanaPrincipal v1 = new VentanaPrincipal();
+        v1.app = this.app;
         v1.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnAtrasActionPerformed
+
+    private void btnBinariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBinariaActionPerformed
+        Busqueda binaria = new BusquedaBinaria();
+        int opcion = 0;
+        if(chkId.isSelected()){opcion = 1;
+        }else if(chkNombre.isSelected()){ opcion = 2;
+        }else if(chkPrecio.isSelected()){ opcion = 4;
+        }
+        Ordenamiento burstSort = new BurstSort();
+        app.setEstrategiaOrdenamiento(burstSort);
+        app.ordenarProductos(opcion);
+        app.setEstrategiaBusqueda(binaria);
+        //taProductoBuscado.setText(app.buscarProductos(opcion, tfParametro.getText()));
+        tfParametro.setText("");
+    }//GEN-LAST:event_btnBinariaActionPerformed
+
+    private void btnSecuencialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSecuencialActionPerformed
+        Busqueda secuencial = new BusquedaSecuencial();
+        int opcion = 0;
+        if(chkId.isSelected()){opcion = 1;
+        }else if(chkNombre.isSelected()){ opcion = 2;
+        }else if(chkDescripcion.isSelected()){ opcion = 3;
+        }else if(chkPrecio.isSelected()){ opcion = 4;
+        }
+        Ordenamiento burstSort = new BurstSort();
+        app.setEstrategiaOrdenamiento(burstSort);
+        app.ordenarProductos(opcion);
+        app.setEstrategiaBusqueda(secuencial);
+        //taProductoBuscado.setText(app.buscarProductos(opcion, tfParametro.getText()));
+        tfParametro.setText("");
+    }//GEN-LAST:event_btnSecuencialActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        Busqueda binaria = new BusquedaBinaria();
+        Ordenamiento burstSort = new BurstSort();
+        app.setEstrategiaBusqueda(binaria);
+        app.setEstrategiaOrdenamiento(burstSort);
+        int opcion = 0;
+        if(chkId.isSelected()){opcion = 1;
+        }else if(chkNombre.isSelected()){ opcion = 2;
+        }else if(chkDescripcion.isSelected()){ opcion = 3;
+        }else if(chkPrecio.isSelected()){ opcion = 4;
+        }
+        app.eliminarProductos(opcion, tfParametro.getText());
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
