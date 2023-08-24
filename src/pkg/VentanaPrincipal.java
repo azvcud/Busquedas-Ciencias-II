@@ -21,25 +21,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         label1 = new java.awt.Label();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        areaLista = new javax.swing.JTextArea();
         btnBuscarEliminar = new javax.swing.JButton();
         btnInsertar = new javax.swing.JButton();
         btnOrdenamientoBurst = new javax.swing.JButton();
         btnOrdenamientoHash = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Algoritmos de Busqueda - Ciencias ll");
         setResizable(false);
 
         label1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        label1.setText("Algoritmos de Busqueda");
-
-        areaLista.setColumns(20);
-        areaLista.setRows(5);
-        jScrollPane1.setViewportView(areaLista);
+        label1.setText("Algoritmos de Búsqueda");
 
         btnBuscarEliminar.setText("Buscar/Eliminar");
         btnBuscarEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -55,13 +51,39 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnOrdenamientoBurst.setText("Ordenamiento BurstSort");
+        btnOrdenamientoBurst.setText("BurstSort");
+        btnOrdenamientoBurst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOrdenamientoBurstActionPerformed(evt);
+            }
+        });
 
-        btnOrdenamientoHash.setText("Ordenamiento TablaHash");
+        btnOrdenamientoHash.setText("Tabla Hash");
 
         jLabel1.setText("Ordenar:");
 
         jLabel2.setText("Modificar:");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "ID", "Nombre", "Descripción", "Precio"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -70,29 +92,25 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel1))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2))
+                                .addGap(27, 27, 27)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnOrdenamientoBurst, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnBuscarEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnOrdenamientoBurst)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(16, 16, 16)
-                                        .addComponent(btnBuscarEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(btnInsertar, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(btnOrdenamientoHash))))))
-                .addContainerGap(30, Short.MAX_VALUE))
+                                    .addComponent(btnOrdenamientoHash, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnInsertar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,15 +124,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(btnBuscarEliminar)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnBuscarEliminar)
+                        .addComponent(jLabel2))
                     .addComponent(btnInsertar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         label1.getAccessibleContext().setAccessibleName("");
+        btnOrdenamientoBurst.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -131,6 +151,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         v1.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnInsertarActionPerformed
+
+    private void btnOrdenamientoBurstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdenamientoBurstActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnOrdenamientoBurstActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -165,14 +189,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea areaLista;
-    private javax.swing.JButton btnBuscarEliminar;
-    private javax.swing.JButton btnInsertar;
-    private javax.swing.JButton btnOrdenamientoBurst;
-    private javax.swing.JButton btnOrdenamientoHash;
+    public javax.swing.JButton btnBuscarEliminar;
+    public javax.swing.JButton btnInsertar;
+    public javax.swing.JButton btnOrdenamientoBurst;
+    public javax.swing.JButton btnOrdenamientoHash;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    public javax.swing.JTable jTable1;
     private java.awt.Label label1;
     // End of variables declaration//GEN-END:variables
 }
