@@ -1,34 +1,17 @@
 package pkg;
+
 /**
  *
  * @author Shiro
  */
 public class VentanaBusquedaEliminacion extends javax.swing.JFrame {
-    public javax.swing.JButton btnAtras;
-    public javax.swing.JButton btnBinaria;
-    public javax.swing.JButton btnEliminar;
-    public javax.swing.JButton btnSecuencial;
-    public javax.swing.JButton btnTransformacion;
-    public javax.swing.JCheckBox chkDescripcion;
-    public javax.swing.JCheckBox chkId;
-    public javax.swing.JCheckBox chkNombre;
-    public javax.swing.JCheckBox chkPrecio;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private java.awt.Label label1;
-    public javax.swing.JLabel labelTiempoBusqueda;
-    public javax.swing.JScrollPane productoBuscado;
-    public javax.swing.JTextArea taProductoBuscado;
-    public javax.swing.JTextField tfParametro;
 
     public VentanaBusquedaEliminacion() {
         initComponents();
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         btnBinaria = new javax.swing.JButton();
@@ -42,7 +25,7 @@ public class VentanaBusquedaEliminacion extends javax.swing.JFrame {
         chkNombre = new javax.swing.JCheckBox();
         chkDescripcion = new javax.swing.JCheckBox();
         chkPrecio = new javax.swing.JCheckBox();
-        productoBuscado = new javax.swing.JScrollPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
         taProductoBuscado = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -95,7 +78,7 @@ public class VentanaBusquedaEliminacion extends javax.swing.JFrame {
 
         taProductoBuscado.setColumns(20);
         taProductoBuscado.setRows(5);
-        productoBuscado.setViewportView(taProductoBuscado);
+        jScrollPane1.setViewportView(taProductoBuscado);
 
         jLabel1.setText("Producto buscado:");
 
@@ -109,126 +92,105 @@ public class VentanaBusquedaEliminacion extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel3)
-                                        .addGroup(layout
-                                                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(jLabel2)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(labelTiempoBusqueda,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                                .addComponent(jLabel1)
-                                                .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(btnAtras, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(52, 52, 52)
-                                                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addComponent(productoBuscado)
-                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout
-                                                        .createSequentialGroup()
-                                                        .addGroup(layout
-                                                                .createParallelGroup(
-                                                                        javax.swing.GroupLayout.Alignment.LEADING)
-                                                                .addComponent(tfParametro,
-                                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 234,
-                                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addComponent(chkNombre)
-                                                                .addComponent(chkDescripcion)
-                                                                .addComponent(chkPrecio)
-                                                                .addComponent(chkId))
-                                                        .addGap(18, 18, 18)
-                                                        .addGroup(layout
-                                                                .createParallelGroup(
-                                                                        javax.swing.GroupLayout.Alignment.LEADING)
-                                                                .addComponent(btnBinaria)
-                                                                .addComponent(btnSecuencial)
-                                                                .addComponent(btnTransformacion)
-                                                                .addComponent(btnEliminar)))))
-                                .addContainerGap(30, Short.MAX_VALUE)));
-        layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGap(18, 18, 18)
+                            .addComponent(labelTiempoBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel1)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(btnAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(52, 52, 52)
+                            .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(btnAtras)
-                                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16,
-                                        Short.MAX_VALUE)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(tfParametro, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(chkId)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(chkNombre)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(chkDescripcion)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(chkPrecio))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(btnBinaria)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(btnSecuencial)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(btnTransformacion)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(btnEliminar)))
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel1)
-                                .addGap(5, 5, 5)
-                                .addComponent(productoBuscado, javax.swing.GroupLayout.PREFERRED_SIZE, 49,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel2)
-                                        .addComponent(labelTiempoBusqueda))
-                                .addGap(30, 30, 30)));
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(tfParametro, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(chkNombre)
+                                .addComponent(chkDescripcion)
+                                .addComponent(chkPrecio)
+                                .addComponent(chkId))
+                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnBinaria)
+                                .addComponent(btnSecuencial)
+                                .addComponent(btnTransformacion)
+                                .addComponent(btnEliminar)))))
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAtras)
+                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(tfParametro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(chkId)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(chkNombre)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(chkDescripcion)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(chkPrecio))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnBinaria)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnSecuencial)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnTransformacion)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnEliminar)))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addGap(5, 5, 5)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(labelTiempoBusqueda))
+                .addGap(30, 30, 30))
+        );
 
         getAccessibleContext().setAccessibleName("Ventana");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnTransformacionActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnTransformacionActionPerformed
+    private void btnTransformacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransformacionActionPerformed
         // TODO add your handling code here:
-    }// GEN-LAST:event_btnTransformacionActionPerformed
+    }//GEN-LAST:event_btnTransformacionActionPerformed
 
-    private void chkIdActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_chkIdActionPerformed
+    private void chkIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkIdActionPerformed
         // TODO add your handling code here:
-    }// GEN-LAST:event_chkIdActionPerformed
+    }//GEN-LAST:event_chkIdActionPerformed
 
-    private void chkDescripcionActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_chkDescripcionActionPerformed
+    private void chkDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkDescripcionActionPerformed
         // TODO add your handling code here:
-    }// GEN-LAST:event_chkDescripcionActionPerformed
+    }//GEN-LAST:event_chkDescripcionActionPerformed
 
-    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAtrasActionPerformed
+    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         VentanaPrincipal v1 = new VentanaPrincipal();
         v1.setVisible(true);
         this.dispose();
-    }// GEN-LAST:event_btnAtrasActionPerformed
+    }//GEN-LAST:event_btnAtrasActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
-        // (optional) ">
-        /*
-         * If Nimbus (introduced in Java SE 6) is not available, stay with the default
-         * look and feel.
-         * For details see
-         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -238,33 +200,48 @@ public class VentanaBusquedaEliminacion extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaBusquedaEliminacion.class.getName())
-                    .log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaBusquedaEliminacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaBusquedaEliminacion.class.getName())
-                    .log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaBusquedaEliminacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaBusquedaEliminacion.class.getName())
-                    .log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaBusquedaEliminacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaBusquedaEliminacion.class.getName())
-                    .log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaBusquedaEliminacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        // </editor-fold>
-        // </editor-fold>
-        // </editor-fold>
-        // </editor-fold>
-        // </editor-fold>
-        // </editor-fold>
-        // </editor-fold>
-        // </editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
             public void run() {
                 new VentanaBusquedaEliminacion().setVisible(true);
             }
         });
     }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtras;
+    private javax.swing.JButton btnBinaria;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnSecuencial;
+    private javax.swing.JButton btnTransformacion;
+    private javax.swing.JCheckBox chkDescripcion;
+    private javax.swing.JCheckBox chkId;
+    private javax.swing.JCheckBox chkNombre;
+    private javax.swing.JCheckBox chkPrecio;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private java.awt.Label label1;
+    private javax.swing.JLabel labelTiempoBusqueda;
+    private javax.swing.JTextArea taProductoBuscado;
+    private javax.swing.JTextField tfParametro;
+    // End of variables declaration//GEN-END:variables
 }
