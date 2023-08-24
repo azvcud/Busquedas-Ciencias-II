@@ -14,9 +14,12 @@ public class main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        VentanaPrincipal ventana = new VentanaPrincipal();
-        ventana.setVisible(true);
+        Modelo modelo = new Modelo();
+        Vista vista = new Vista();
+        Control control = new Control(vista, modelo);
+        control.iniciar();
         
+        /*
         TiendaProductos app = new TiendaProductos();
         Busqueda secuencial = new BusquedaSecuencial();
         Busqueda binaria = new BusquedaSecuencial();
@@ -60,6 +63,7 @@ public class main {
         app.ordenarProductos(2);
         System.out.println(app.toString());
         System.out.println(app.buscarProductos(2, "Papas BBQ"));
+        */
     }
     
 }

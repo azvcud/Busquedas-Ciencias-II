@@ -11,26 +11,14 @@ import java.awt.event.ActionListener;
  *
  * @author amirz
  */
-public class Vista implements ActionListener {
-    private VentanaPrincipal ventanaInicio;
-    private VentanaInsertar ventanaFormulario;
-    private VentanaBusquedaEliminacion ventanaGestion;
+public class Vista {
+    public VentanaPrincipal ventanaInicio;
+    public VentanaInsertar ventanaFormulario;
+    public VentanaBusquedaEliminacion ventanaGestion;
     
     public Vista() {
         ventanaInicio = new VentanaPrincipal();
         ventanaFormulario = new VentanaInsertar();
-        
-        this.ventanaInicio.btnBuscarEliminar.addActionListener(this);
-        this.ventanaInicio.btnInsertar.addActionListener(this);
-        this.ventanaInicio.btnOrdenamientoBurst.addActionListener(this);
-        this.ventanaInicio.btnOrdenamientoHash.addActionListener(this);
-        this.ventanaFormulario.btnInsertar.addActionListener(this);
-        this.ventanaGestion.btnBuscar.addActionListener(this);
-        this.ventanaGestion.btnEliminar.addActionListener(this);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+        ventanaGestion = new VentanaBusquedaEliminacion();
+    }    
 }
