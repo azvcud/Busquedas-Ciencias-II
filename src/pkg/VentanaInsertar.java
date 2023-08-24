@@ -53,6 +53,11 @@ public class VentanaInsertar extends javax.swing.JFrame {
         });
 
         btnInsertar.setText("Insertar");
+        btnInsertar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsertarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Id:");
 
@@ -95,7 +100,7 @@ public class VentanaInsertar extends javax.swing.JFrame {
                                     .addComponent(campoId))))))
                 .addGap(30, 30, 30))
             .addGroup(layout.createSequentialGroup()
-                .addGap(191, 191, 191)
+                .addGap(201, 201, 201)
                 .addComponent(btnInsertar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -122,9 +127,9 @@ public class VentanaInsertar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(campoDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnInsertar)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
@@ -135,6 +140,10 @@ public class VentanaInsertar extends javax.swing.JFrame {
         v1.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnAtrasActionPerformed
+
+    private void btnInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnInsertarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -173,7 +182,7 @@ public class VentanaInsertar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtras;
-    private javax.swing.JButton btnInsertar;
+    public javax.swing.JButton btnInsertar;
     private javax.swing.JTextField campoDescripcion;
     private javax.swing.JTextField campoId;
     private javax.swing.JTextField campoNombre;
