@@ -135,17 +135,11 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Ordenamiento BurstSort"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOrdenamientoBurstActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnOrdenamientoHash">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ordenamiento TablaHash"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOrdenamientoHashActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>

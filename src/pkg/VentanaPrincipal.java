@@ -9,25 +9,13 @@ package pkg;
  * @author Shiro
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
-    TiendaProductos app = new TiendaProductos();
-    
+
+    /**
+     * Creates new form VentanaPrincipal
+     */
     public VentanaPrincipal() {
-        initComponents();    
-        Producto producto1 = new Producto("Zumo de Naranja", "Esta vaina es de los dioses.", 4500);
-        Producto producto2 = new Producto("Papas BBQ", "El picor es excelente.", 1800);
-        Producto producto3 = new Producto("Kilo de carne", "Para invadir Ucrania con todas las de la ley.", 10000);
-        Producto producto4 = new Producto("Pluma", "Excelente para escribir.", 24500);
-        Producto producto5 = new Producto("Cuaderno 7 materias", "Necesario para el estudio.", 24500);
-        Producto producto6 = new Producto("Celular", "Con 4G incluido", 1450000);
-        
-        app.insertarProducto(producto1);
-        app.insertarProducto(producto2);
-        app.insertarProducto(producto3);
-        app.insertarProducto(producto4);
-        app.insertarProducto(producto5);
-        app.insertarProducto(producto6);
+        initComponents();
     }
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -68,18 +56,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
 
         btnOrdenamientoBurst.setText("Ordenamiento BurstSort");
-        btnOrdenamientoBurst.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOrdenamientoBurstActionPerformed(evt);
-            }
-        });
 
         btnOrdenamientoHash.setText("Ordenamiento TablaHash");
-        btnOrdenamientoHash.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOrdenamientoHashActionPerformed(evt);
-            }
-        });
 
         jLabel1.setText("Ordenar:");
 
@@ -144,33 +122,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void btnBuscarEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEliminarActionPerformed
         // TODO add your handling code here:
         VentanaBusquedaEliminacion v1 = new VentanaBusquedaEliminacion();
-        v1.app = this.app;
         v1.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnBuscarEliminarActionPerformed
 
     private void btnInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarActionPerformed
         VentanaInsertar v1 = new VentanaInsertar();
-        v1.app = this.app;
         v1.setVisible(true);
         this.dispose();
-        
-        
     }//GEN-LAST:event_btnInsertarActionPerformed
-
-    private void btnOrdenamientoBurstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdenamientoBurstActionPerformed
-        Ordenamiento burstSort = new BurstSort();
-        app.setEstrategiaOrdenamiento(burstSort);
-        app.ordenarProductos(4);
-        areaLista.setText(app.toString());
-    }//GEN-LAST:event_btnOrdenamientoBurstActionPerformed
-
-    private void btnOrdenamientoHashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdenamientoHashActionPerformed
-        Ordenamiento hash = new TablaHash();
-        app.setEstrategiaOrdenamiento(hash);
-        app.ordenarProductos(4);
-        areaLista.setText(app.toString());
-    }//GEN-LAST:event_btnOrdenamientoHashActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

@@ -60,7 +60,6 @@ public class main {
         app.ordenarProductos(2);
         System.out.println(app.toString());
         System.out.println(app.buscarProductos(2, "Papas BBQ"));
-        
     }
     
 }
