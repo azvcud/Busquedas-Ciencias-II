@@ -13,14 +13,18 @@ import java.awt.event.ActionListener;
  */
 public class Vista implements ActionListener {
     private VentanaPrincipal ventanaInicio;
+    private VentanaInsertar ventanaFormulario;
     
     public Vista() {
         ventanaInicio = new VentanaPrincipal();
+        ventanaFormulario = new VentanaInsertar();
         
         this.ventanaInicio.btnBuscarEliminar.addActionListener(this);
         this.ventanaInicio.btnInsertar.addActionListener(this);
         this.ventanaInicio.btnOrdenamientoBurst.addActionListener(this);
         this.ventanaInicio.btnOrdenamientoHash.addActionListener(this);
+        this.ventanaFormulario.btnInsertar.addActionListener(this);
+        
     }
 
     @Override
