@@ -6,6 +6,7 @@ package pkg;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,4 +22,8 @@ public class Vista {
         ventanaFormulario = new VentanaInsertar();
         ventanaGestion = new VentanaBusquedaEliminacion();
     }    
+    
+    public void mensajeError(String textoPantalla) {
+        JOptionPane.showMessageDialog(null, textoPantalla, "Error", JOptionPane.ERROR_MESSAGE);
+    }
 }

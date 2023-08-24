@@ -17,7 +17,6 @@ public class VentanaBusquedaEliminacion extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         label1 = new java.awt.Label();
-        btnAtras = new javax.swing.JButton();
         tfParametro = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -49,24 +48,19 @@ public class VentanaBusquedaEliminacion extends javax.swing.JFrame {
         label1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         label1.setText("Busqueda y Eliminación");
 
-        btnAtras.setText("<-");
-        btnAtras.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAtrasActionPerformed(evt);
-            }
-        });
-
         jLabel1.setText("Productos:");
 
         jLabel3.setText("Valor a buscar:");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Nombre", "Descripción", "Precio" }));
+        jComboBox1.setSelectedIndex(-1);
 
         jLabel4.setText("Columna:");
 
         jLabel6.setText("Búsqueda:");
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Binaria", "Secuencial", "Transformación por claves" }));
+        jComboBox2.setSelectedIndex(-1);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -118,8 +112,7 @@ public class VentanaBusquedaEliminacion extends javax.swing.JFrame {
                                     .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(47, 47, 47)
+                                .addGap(95, 95, 95)
                                 .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
@@ -127,9 +120,7 @@ public class VentanaBusquedaEliminacion extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAtras)
-                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -163,12 +154,6 @@ public class VentanaBusquedaEliminacion extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
-        VentanaPrincipal v1 = new VentanaPrincipal();
-        v1.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnAtrasActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
@@ -214,7 +199,6 @@ public class VentanaBusquedaEliminacion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAtras;
     public javax.swing.JButton btnBuscar;
     public javax.swing.JButton btnEliminar;
     private javax.swing.JComboBox<String> jComboBox1;

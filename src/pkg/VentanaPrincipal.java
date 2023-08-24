@@ -85,6 +85,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel3.setText("Columna a ordenar:");
 
         selectorColumna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Nombre", "Descripción", "Precio" }));
+        selectorColumna.setSelectedIndex(-1);
         selectorColumna.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selectorColumnaActionPerformed(evt);

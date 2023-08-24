@@ -6,10 +6,8 @@ package pkg;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import static javax.swing.WindowConstants.HIDE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 /**
  *
@@ -39,6 +37,11 @@ public class Control implements ActionListener {
         this.vista.ventanaFormulario.setVisible(false);
         this.vista.ventanaGestion.setVisible(false);
         this.vista.ventanaInicio.setLocationRelativeTo(null);
+        
+        this.vista.ventanaFormulario.setDefaultCloseOperation(HIDE_ON_CLOSE);
+        this.vista.ventanaGestion.setDefaultCloseOperation(HIDE_ON_CLOSE);
+        
+        setEstadoItem(this.vista.ventanaInicio.selectorColumna.getSelectedIndex());
         
         cargarProductos();
         this.vista.ventanaInicio.setVisible(true);
@@ -73,35 +76,53 @@ public class Control implements ActionListener {
         }
         
         if(e.getSource() == this.vista.ventanaInicio.btnOrdenamientoBurst) {
-            modelo.cambiarEstrategiaOrdenamiento(1, getEstadoItem());
-            cargarProductos();
+            if(getEstadoItem() == -1) {
+                vista.mensajeError("No se ha seleccionado ordenamiento");
+            } else {
+                modelo.cambiarEstrategiaOrdenamiento(1, getEstadoItem());
+                cargarProductos();
+            }
         }
         
         if(e.getSource() == this.vista.ventanaInicio.btnOrdenamientoHash) {
-            modelo.cambiarEstrategiaOrdenamiento(2, getEstadoItem());
-            cargarProductos();
+            if(getEstadoItem() == -1) {
+                vista.mensajeError("No se ha seleccionado ordenamiento");
+            } else if(getEstadoItem() == 3) {
+                vista.mensajeError("No existe soporte de Hashing para la columna seleccionada.");
+            } else {
+                modelo.cambiarEstrategiaOrdenamiento(2, getEstadoItem());
+                cargarProductos();
+            }
         }
         
         if(e.getSource() == this.vista.ventanaInicio.btnInsertar) {
-            this.vista.ventanaInicio.setVisible(false);
             this.vista.ventanaFormulario.setVisible(true);
         }
         
         if(e.getSource() == this.vista.ventanaInicio.btnBuscarEliminar) {
-            this.vista.ventanaInicio.setVisible(false);
             this.vista.ventanaGestion.setVisible(true);
         }
         
-        if(e.getSource() == this.vista.ventanaFormulario.btnInsertar) {
-            String nombre = this.vista.ventanaFormulario.campoNombre.getText();
-            String descripcion = this.vista.ventanaFormulario.campoDescripcion.getText();
-            int precio = Integer.parseInt(this.vista.ventanaFormulario.campoPrecio.getText());
+        if(e.getSource() == this.vista.ventanaFormulario.btnInsertar) {            
+            try {
+                int precio = Integer.parseInt(this.vista.ventanaFormulario.campoPrecio.getText());
+                String nombre = this.vista.ventanaFormulario.campoNombre.getText();
+                String descripcion = this.vista.ventanaFormulario.campoDescripcion.getText();
+                
+                if(nombre.isBlank() || descripcion.isBlank()) { vista.mensajeError("Algún campo está vacío."); }
+                else{ 
+                    modelo.insertarProducto(nombre, descripcion, precio); 
+                    
+                    this.vista.ventanaFormulario.setVisible(false);
             
-            modelo.insertarProducto(nombre, descripcion, precio);
-            
-            this.vista.ventanaFormulario.setVisible(false);
-            this.vista.ventanaInicio.setVisible(true);
-            cargarProductos();
+                    this.vista.ventanaFormulario.campoDescripcion.setText("");
+                    this.vista.ventanaFormulario.campoNombre.setText("");
+                    this.vista.ventanaFormulario.campoPrecio.setText("");
+                    cargarProductos();
+                }
+            } catch (NumberFormatException nfe) {
+                vista.mensajeError("El precio ingresado es inválido.");
+            }
         }
         
         
