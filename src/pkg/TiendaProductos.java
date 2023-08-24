@@ -59,6 +59,10 @@ public class TiendaProductos {
     public void setEstrategiaOrdenamiento(Ordenamiento estrategiaOrdenamiento) {
         this.estrategiaOrdenamiento = estrategiaOrdenamiento;
     }
+
+    public ArrayList<Producto> getProductosAplicacion() {
+        return productosAplicacion;
+    }
     
     public void insertarProducto(Producto producto) {
         productosAplicacion.add(producto);
