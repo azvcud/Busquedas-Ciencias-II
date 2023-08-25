@@ -25,29 +25,14 @@ public class TiendaProductos {
         setProductosAplicacion(estrategiaOrdenamiento.ordenar(productosAplicacion, opcion));
     }
 
-    public String buscarProductos(int opcion, Object atributo) {
-        return enlistar(estrategiaBusqueda.buscar(
+    public ArrayList<Producto> buscarProductos(int opcion, String atributo) {
+        return estrategiaBusqueda.buscar(
                 productosAplicacion,
                 opcion,
                 atributo
-        ));
+        );
     }
     
-    @Override
-    public String toString() {
-        return enlistar(productosAplicacion);
-    }
-    
-    private String enlistar(ArrayList<Producto> listaProductos) {
-        String lista = "";
-        
-        for(int i = 0; i < listaProductos.size(); i++) {
-            lista = lista + listaProductos.get(i).toString();
-        }
-        
-        return lista;
-    }
-
     public void setProductosAplicacion(ArrayList<Producto> productosAplicacion) {
         this.productosAplicacion = productosAplicacion;
     }
@@ -68,7 +53,7 @@ public class TiendaProductos {
         productosAplicacion.add(producto);
     }
     
-    public void eliminarProducto(int clave) {
+    public void eliminarProducto(String clave) {
         productosAplicacion.removeAll(estrategiaBusqueda.buscar(
                 productosAplicacion,
                 1,
@@ -76,7 +61,7 @@ public class TiendaProductos {
         ));
     }
     
-    public void eliminarProductos(int opcion, Object atributo) {
+    public void eliminarProductos(int opcion, String atributo) {
         productosAplicacion.removeAll(estrategiaBusqueda.buscar(
                 productosAplicacion,
                 opcion,

@@ -65,11 +65,6 @@ public class BurstSort implements Ordenamiento {
         
         return union;
     }
-    
-    /*
-    private boolean comparar(ArrayList<Producto> lista1, ArrayList<Producto> lista2, int opcion) {
-        
-    }*/
 
     private void setColumnaOrdenar(int columnaOrdenar) {
         this.columnaOrdenar = columnaOrdenar;

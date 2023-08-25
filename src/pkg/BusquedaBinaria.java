@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class BusquedaBinaria implements Busqueda {
 
     @Override
-    public ArrayList<Producto> buscar(ArrayList<Producto> listaProductos, int opcion, Object atributo) {
+    public ArrayList<Producto> buscar(ArrayList<Producto> listaProductos, int opcion, String atributo) {
         ArrayList<Producto> productosEncontrados = new ArrayList<>();
         Producto productoSeleccionado = null;
         int izquierda = 0;
@@ -22,36 +22,36 @@ public class BusquedaBinaria implements Busqueda {
         int mitad;
         
         
-        while(izquierda != derecha) {
-            mitad = (int) ceil((izquierda + derecha)/2);
+        while(izquierda <= derecha) {
+            mitad = ((izquierda + derecha) / 2);
             productoSeleccionado = listaProductos.get(mitad);
             
-            if(compararMayor(productoSeleccionado, opcion, atributo))   { derecha = mitad - 1; }
-            else                                                        { izquierda = mitad; }
-        }
-        
-        if(comparar(productoSeleccionado, opcion, atributo)) { 
-            productosEncontrados.add(productoSeleccionado); 
-            return productosEncontrados;
+            if(compararMenor(productoSeleccionado, opcion, atributo))       { izquierda = mitad + 1; }
+            else if(compararMayor(productoSeleccionado, opcion, atributo))  { derecha = mitad - 1; }
+            
+            else { 
+                productosEncontrados.add(productoSeleccionado);
+                return productosEncontrados;
+            }
         }
         
         return null;
     }
     
-    private boolean comparar(Producto productoSeleccionado, int opcion, Object atributo) {
+    private boolean compararMenor(Producto productoSeleccionado, int opcion, String atributo) {
         return switch (opcion) {
-            case 1 -> productoSeleccionado.getId() == ((int)atributo);
-            case 2 -> productoSeleccionado.getNombre().equals((String)atributo);
-            case 4 -> productoSeleccionado.getPrecio() == ((int) atributo);
+            case 1 -> productoSeleccionado.getId() < Integer.parseInt(atributo);
+            case 2 -> (productoSeleccionado.getNombre().compareTo((String)atributo)) < 0;
+            case 4 -> productoSeleccionado.getPrecio() < Integer.parseInt(atributo);
             default -> false;
         };
     }
     
-    private boolean compararMayor(Producto productoSeleccionado, int opcion, Object atributo) {
+    private boolean compararMayor(Producto productoSeleccionado, int opcion, String atributo) {
         return switch (opcion) {
-            case 1 -> productoSeleccionado.getId() > ((int)atributo);
+            case 1 -> productoSeleccionado.getId() > Integer.parseInt(atributo);
             case 2 -> (productoSeleccionado.getNombre().compareTo((String)atributo)) > 0;
-            case 4 -> productoSeleccionado.getPrecio() > ((int) atributo);
+            case 4 -> productoSeleccionado.getPrecio() > Integer.parseInt(atributo);
             default -> false;
         };
     }

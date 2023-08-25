@@ -50,18 +50,21 @@ public class Modelo {
         tiendaProductos.ordenarProductos(columnaOrden);
     }
     
-    public void buscarProductos() {
-        int variablePrueba1 = 1;
-        Object variablePrueba2 = 0;
-        tiendaProductos.buscarProductos(variablePrueba1, variablePrueba2);
+    public ArrayList<Producto> buscarProductos(int opcion, String atributo) {
+        return tiendaProductos.buscarProductos(opcion, atributo);
     }
     
     public ArrayList<Producto> enviarListaProductos() {
         return tiendaProductos.getProductosAplicacion();
     }
     
-    public void cambiarEstrategiaBusqueda() {
-        
+    public void cambiarEstrategiaBusqueda(int columnaOrden) {
+        switch(columnaOrden) {
+            case 1 -> tiendaProductos.setEstrategiaBusqueda(secuencial);
+            case 2 -> tiendaProductos.setEstrategiaBusqueda(binaria);
+            case 3 -> tiendaProductos.setEstrategiaBusqueda(transformacionClaves);
+            default -> tiendaProductos.setEstrategiaBusqueda(null);
+        }
     }
     
     public void cambiarEstrategiaOrdenamiento(int opcion, int columnaOrden) {
@@ -76,9 +79,5 @@ public class Modelo {
     
     public void insertarProducto(String nombre, String descripcion, int precio) {
        tiendaProductos.insertarProducto(new Producto(nombre, descripcion, precio));
-    }
-    
-    public void eliminarProducto() {
-        
     }
 }

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class BusquedaSecuencial implements Busqueda {
 
     @Override
-    public ArrayList<Producto> buscar(ArrayList<Producto> listaProductos, int opcion, Object atributo) {
+    public ArrayList<Producto> buscar(ArrayList<Producto> listaProductos, int opcion, String atributo) {
         ArrayList<Producto> productosEncontrados = new ArrayList<>();
         Producto productoSeleccionado;
         
@@ -27,12 +27,12 @@ public class BusquedaSecuencial implements Busqueda {
         return productosEncontrados;
     }
     
-    private boolean comparar(Producto productoSeleccionado, int opcion, Object atributo) {
+    private boolean comparar(Producto productoSeleccionado, int opcion, String atributo) {
         return switch (opcion) {
-            case 1 -> productoSeleccionado.getId() == ((int)atributo);
+            case 1 -> productoSeleccionado.getId() == Integer.parseInt(atributo);
             case 2 -> productoSeleccionado.getNombre().equals((String)atributo);
             case 3 -> productoSeleccionado.getDescripcion().contains((String) atributo);
-            case 4 -> productoSeleccionado.getPrecio() == ((int) atributo);
+            case 4 -> productoSeleccionado.getPrecio() == Integer.parseInt(atributo);
             default -> false;
         };
     }

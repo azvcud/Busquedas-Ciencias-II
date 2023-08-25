@@ -10,5 +10,5 @@ import java.util.ArrayList;
  * @author amirz
  */
 public interface Busqueda {
-    public ArrayList<Producto> buscar(ArrayList<Producto> listaProductos, int opcion, Object atributo);
+    public ArrayList<Producto> buscar(ArrayList<Producto> listaProductos, int opcion, String atributo);
 }
