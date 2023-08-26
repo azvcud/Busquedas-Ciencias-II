@@ -54,11 +54,6 @@ public class VentanaBusquedaEliminacion extends javax.swing.JFrame {
 
         cbColumna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Nombre", "Descripción", "Precio" }));
         cbColumna.setSelectedIndex(-1);
-        cbColumna.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbColumnaActionPerformed(evt);
-            }
-        });
 
         jLabel4.setText("Columna:");
 
@@ -66,11 +61,6 @@ public class VentanaBusquedaEliminacion extends javax.swing.JFrame {
 
         cbBusqueda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Secuencial", "Binaria", "Transformación por claves" }));
         cbBusqueda.setSelectedIndex(-1);
-        cbBusqueda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbBusquedaActionPerformed(evt);
-            }
-        });
 
         tablaBusqueda.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -86,11 +76,6 @@ public class VentanaBusquedaEliminacion extends javax.swing.JFrame {
         jScrollPane3.setViewportView(tablaBusqueda);
 
         btnBuscar.setText("Buscar");
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
-            }
-        });
 
         btnEliminar.setText("Eliminar");
 
@@ -165,19 +150,7 @@ public class VentanaBusquedaEliminacion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBuscarActionPerformed
-
-    private void cbColumnaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbColumnaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbColumnaActionPerformed
-
-    private void cbBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBusquedaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbBusquedaActionPerformed
-
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -201,19 +174,11 @@ public class VentanaBusquedaEliminacion extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VentanaBusquedaEliminacion().setVisible(true);
-            }
-        });
+        java.awt.EventQueue.invokeLater(() -> 
+            new VentanaPrincipal().setVisible(true)
+        );
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

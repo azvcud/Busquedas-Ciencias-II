@@ -36,6 +36,7 @@ public class Modelo {
         Producto producto4 = new Producto("Pluma", "Excelente para escribir.", 24500);
         Producto producto5 = new Producto("Cuaderno 7 materias", "Necesario para el estudio.", 24500);
         Producto producto6 = new Producto("Celular", "Con 4G incluido", 1450000);
+        Producto producto7 = new Producto("Televisor 4K", "Imágenes impresionantes.", 85000);
         
         tiendaProductos.insertarProducto(producto1);
         tiendaProductos.insertarProducto(producto2);
@@ -43,6 +44,7 @@ public class Modelo {
         tiendaProductos.insertarProducto(producto4);
         tiendaProductos.insertarProducto(producto5);
         tiendaProductos.insertarProducto(producto6);
+        tiendaProductos.insertarProducto(producto7);
     }
     
     

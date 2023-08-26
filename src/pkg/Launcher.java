@@ -8,7 +8,7 @@ package pkg;
  *
  * @author amirz
  */
-public class main {
+public class Launcher {
 
     /**
      * @param args the command line arguments
@@ -16,6 +16,7 @@ public class main {
     public static void main(String[] args) {
         Modelo modelo = new Modelo();
         Vista vista = new Vista();
+        
         Control control = new Control(vista, modelo);
         control.iniciar();
     }

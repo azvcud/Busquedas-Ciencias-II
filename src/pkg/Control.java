@@ -6,6 +6,7 @@ package pkg;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,11 +18,16 @@ public class Control implements ActionListener {
 
     private Vista vista;
     private Modelo modelo;
-    private int estadoItem;
-    private int listaBusqueda;
-    private int listaColumna;
+    
+    private static final String[] nombresColumnas = {"ID", "Nombre", "Descripción", "Precio"};
+    
+    private ObservadorControl ventanaPrincipal;
+    private ObservadorControl ventanaBusquedaEliminacion;
 
     public Control(Vista vista, Modelo modelo) {
+        ventanaPrincipal = new LogicaVentanaPrincipal();
+        ventanaBusquedaEliminacion = new LogicaVentanaBusquedaEliminacion();
+        
         this.vista = vista;
         this.modelo = modelo;
 
@@ -45,132 +51,29 @@ public class Control implements ActionListener {
         this.vista.ventanaFormulario.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.vista.ventanaGestion.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         
-        setEstadoItem(this.vista.ventanaInicio.selectorColumna.getSelectedIndex());
-        setListaBusqueda(this.vista.ventanaGestion.cbBusqueda.getSelectedIndex());
-        setListaColumna(this.vista.ventanaGestion.cbColumna.getSelectedIndex());
-        
-        cargarProductos();
+        this.vista.ventanaInicio.tablaProductos.setModel(cargarTablaBusqueda(modelo.enviarListaProductos()));
         this.vista.ventanaInicio.setVisible(true);
-    }
-    
-    public void cargarProductos() {
-        String[] nombresColumnas = {"ID", "Nombre", "Descripción", "Precio"};
-        DefaultTableModel modeloTabla = new DefaultTableModel(nombresColumnas, 0);
-        
-        for(Producto producto: modelo.enviarListaProductos()) {
-            modeloTabla.addRow(new Object[]{
-                producto.getId(), 
-                producto.getNombre(),
-                producto.getDescripcion(),
-                producto.getPrecio()
-            });
-        }
-        
-        this.vista.ventanaInicio.tablaProductos.setModel(modeloTabla);
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == this.vista.ventanaInicio.selectorColumna) { selectorColumna(); }
+        if(e.getSource() == this.vista.ventanaInicio.btnOrdenamientoBurst) { btnOrdenamientoBurst(); }
+        if(e.getSource() == this.vista.ventanaInicio.btnOrdenamientoHash) { btnOrdenamientoHash(); }
+        if(e.getSource() == this.vista.ventanaInicio.btnInsertar) { this.vista.ventanaFormulario.setVisible(true); }
+        if(e.getSource() == this.vista.ventanaInicio.btnBuscarEliminar) { this.vista.ventanaGestion.setVisible(true); }
         
-        if(e.getSource() == this.vista.ventanaInicio.selectorColumna) {
-            switch((String)this.vista.ventanaInicio.selectorColumna.getSelectedItem()) {
-                case "ID" -> setEstadoItem(1);
-                case "Nombre" -> setEstadoItem(2);
-                case "Descripción" -> setEstadoItem(3);
-                case "Precio" -> setEstadoItem(4);
-                default -> setEstadoItem(0);
-            }
-        }
+        if(e.getSource() == this.vista.ventanaGestion.cbBusqueda) { cbBusqueda(); }
+        if(e.getSource() == this.vista.ventanaGestion.cbColumna) { cbColumna(); }
+        if(e.getSource() == this.vista.ventanaGestion.btnBuscar) { btnBuscar(); }
         
-        if(e.getSource() == this.vista.ventanaGestion.cbBusqueda) {
-            switch((String)this.vista.ventanaGestion.cbBusqueda.getSelectedItem()) {
-                case "Secuencial" -> setListaBusqueda(1);
-                case "Binaria" -> setListaBusqueda(2);
-                case "Transformación por claves" -> setListaBusqueda(3);
-                default -> setListaBusqueda(4);
-            }
-            
-            modelo.cambiarEstrategiaBusqueda(getListaBusqueda());
-        }
-        
-        if(e.getSource() == this.vista.ventanaGestion.cbColumna) {
-            switch((String)this.vista.ventanaGestion.cbColumna.getSelectedItem()) {
-                case "ID" -> setListaColumna(1);
-                case "Nombre" -> setListaColumna(2);
-                case "Descripción" -> setListaColumna(3);
-                case "Precio" -> setListaColumna(4);
-                default -> setListaColumna(0);
-            }
-        }
-        
-        if(e.getSource() == this.vista.ventanaInicio.btnOrdenamientoBurst) {
-            if(getEstadoItem() == -1) {
-                vista.mensajeError("No se ha seleccionado ordenamiento");
-            } else {
-                modelo.cambiarEstrategiaOrdenamiento(1, getEstadoItem());
-                cargarProductos();
-            }
-        }
-        
-        if(e.getSource() == this.vista.ventanaInicio.btnOrdenamientoHash) {
-            switch (getEstadoItem()) {
-                case -1 -> vista.mensajeError("No se ha seleccionado ordenamiento");
-                case 3 -> vista.mensajeError("No existe soporte de Hashing para la columna seleccionada.");
-                default -> {
-                    modelo.cambiarEstrategiaOrdenamiento(2, getEstadoItem());
-                    cargarProductos();
-                }
-            }
-        }
-        
-        if(e.getSource() == this.vista.ventanaInicio.btnInsertar) {
-            this.vista.ventanaFormulario.setVisible(true);
-        }
-        
-        if(e.getSource() == this.vista.ventanaInicio.btnBuscarEliminar) {
-            this.vista.ventanaGestion.setVisible(true);
-        }
-        
-        if(e.getSource() == this.vista.ventanaFormulario.btnInsertar) {            
-            try {
-                int precio = Integer.parseInt(this.vista.ventanaFormulario.campoPrecio.getText());
-                String nombre = this.vista.ventanaFormulario.campoNombre.getText();
-                String descripcion = this.vista.ventanaFormulario.campoDescripcion.getText();
-                
-                if(nombre.isBlank() || descripcion.isBlank()) { vista.mensajeError("Algún campo está vacío."); }
-                else { 
-                    modelo.insertarProducto(nombre, descripcion, precio); 
-                    
-                    this.vista.ventanaFormulario.setVisible(false);
-            
-                    this.vista.ventanaFormulario.campoDescripcion.setText("");
-                    this.vista.ventanaFormulario.campoNombre.setText("");
-                    this.vista.ventanaFormulario.campoPrecio.setText("");
-                    cargarProductos();
-                }
-            } catch (NumberFormatException nfe) {
-                vista.mensajeError("El precio ingresado es inválido.");
-            }
-        }
-        
-        if(e.getSource() == this.vista.ventanaGestion.btnBuscar) {
-            
-            if(getListaBusqueda() == -1 || getListaColumna() == -1) {
-                vista.mensajeError("No se ha seleccionado búsqueda o columna");
-            }
-            else {
-                this.vista.ventanaGestion.tablaBusqueda.setModel(cargarTablaBusqueda(
-                        this.vista.ventanaGestion.tfValor.getText()
-                ));
-            }
-        }
+        if(e.getSource() == this.vista.ventanaFormulario.btnInsertar) { btnInsertar(); }
     }
 
-    public DefaultTableModel cargarTablaBusqueda(String valor) {
-        String[] nombresColumnas = {"ID", "Nombre", "Descripción", "Precio"};
+    private DefaultTableModel cargarTablaBusqueda(ArrayList<Producto> listaProductos) {
         DefaultTableModel modeloTabla = new DefaultTableModel(nombresColumnas, 0);
         
-        for(Producto producto: modelo.buscarProductos(getListaColumna(), valor)) {
+        for(Producto producto: listaProductos) {
                     modeloTabla.addRow(new Object[]{
                         producto.getId(), 
                         producto.getNombre(),
@@ -182,27 +85,96 @@ public class Control implements ActionListener {
         return modeloTabla;
     }
     
-    public int getEstadoItem() {
-        return estadoItem;
+    private void selectorColumna() {
+        String columnaSeleccionada = (String) this.vista.ventanaInicio.selectorColumna.getSelectedItem();
+        String selector = "Selector";
+            
+        ventanaPrincipal.notificar(selector, columnaSeleccionada);
     }
-
-    public void setEstadoItem(int estadoItem) {
-        this.estadoItem = estadoItem;
+    
+    
+    private void cbBusqueda() {
+        String itemSeleccionado = (String) this.vista.ventanaGestion.cbBusqueda.getSelectedItem();
+        String busqueda = "Busqueda";
+            
+        ventanaBusquedaEliminacion.notificar(busqueda, itemSeleccionado);
+        modelo.cambiarEstrategiaBusqueda(ventanaBusquedaEliminacion.obtenerEstado(busqueda));
     }
-
-    public int getListaBusqueda() {
-        return listaBusqueda;
+    
+    
+    private void cbColumna() {
+        String columnaSeleccionada = (String) this.vista.ventanaGestion.cbColumna.getSelectedItem();
+        String columna = "Columna";
+            
+        ventanaBusquedaEliminacion.notificar(columna, columnaSeleccionada);
+        modelo.cambiarEstrategiaBusqueda(ventanaBusquedaEliminacion.obtenerEstado(columna));
     }
-
-    public void setListaBusqueda(int listaBusqueda) {
-        this.listaBusqueda = listaBusqueda;
+    
+    
+    private void btnOrdenamientoBurst() {
+        if(ventanaPrincipal.obtenerEstado("Selector") == -1) {
+            vista.mensajeError("No se ha seleccionado ordenamiento");
+        } else {
+            modelo.cambiarEstrategiaOrdenamiento(1, ventanaPrincipal.obtenerEstado("Selector"));
+            this.vista.ventanaInicio.tablaProductos.setModel(cargarTablaBusqueda(
+                    modelo.enviarListaProductos()));
+        }
     }
-
-    public int getListaColumna() {
-        return listaColumna;
+    
+    
+    private void btnOrdenamientoHash() {
+        switch (ventanaPrincipal.obtenerEstado("Selector")) {
+            case -1 -> vista.mensajeError("No se ha seleccionado ordenamiento");
+            case 3 -> vista.mensajeError("No existe soporte de Hashing para la columna seleccionada.");
+            default -> {
+                modelo.cambiarEstrategiaOrdenamiento(2, ventanaPrincipal.obtenerEstado("Selector"));
+                this.vista.ventanaInicio.tablaProductos.setModel(cargarTablaBusqueda(
+                        modelo.enviarListaProductos()));
+            }
+        }
     }
-
-    public void setListaColumna(int listaColumna) {
-        this.listaColumna = listaColumna;
+    
+    
+    private void btnInsertar() {
+        try {
+            int precio = Integer.parseInt(this.vista.ventanaFormulario.campoPrecio.getText());
+            String nombre = this.vista.ventanaFormulario.campoNombre.getText();
+            String descripcion = this.vista.ventanaFormulario.campoDescripcion.getText();
+                
+            if(nombre.isBlank() || descripcion.isBlank()) { vista.mensajeError("Algún campo está vacío."); }
+            else { 
+                modelo.insertarProducto(nombre, descripcion, precio); 
+                    
+                this.vista.ventanaFormulario.setVisible(false);
+            
+                this.vista.ventanaFormulario.campoDescripcion.setText("");
+                this.vista.ventanaFormulario.campoNombre.setText("");
+                this.vista.ventanaFormulario.campoPrecio.setText("");
+                this.vista.ventanaInicio.tablaProductos.setModel(cargarTablaBusqueda(
+                    modelo.enviarListaProductos()));
+            }
+        } catch (NumberFormatException nfe) {
+            vista.mensajeError("El precio ingresado es inválido.");
+        }
+    }
+    
+    
+    private void btnBuscar() {
+        if(
+            ventanaBusquedaEliminacion.obtenerEstado("Busqueda") == -1 || 
+            ventanaBusquedaEliminacion.obtenerEstado("Columna") == -1
+        ) 
+        { vista.mensajeError("No se ha seleccionado búsqueda o columna"); }
+            
+        else if(this.vista.ventanaGestion.tfValor.getText().isBlank()) {
+            vista.mensajeError("No se ha digitado valor a buscar");
+        }
+        else {
+            this.vista.ventanaGestion.tablaBusqueda.setModel(cargarTablaBusqueda(
+                    modelo.buscarProductos(
+                            ventanaBusquedaEliminacion.obtenerEstado("Columna"), 
+                            this.vista.ventanaGestion.tfValor.getText())
+            ));
+        }
     }
 }
