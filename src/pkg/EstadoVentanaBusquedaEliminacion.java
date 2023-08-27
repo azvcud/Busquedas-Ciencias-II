@@ -8,28 +8,25 @@ package pkg;
  *
  * @author amirz
  */
-public class LogicaVentanaBusquedaEliminacion implements ObservadorControl {
+public class EstadoVentanaBusquedaEliminacion implements ObservadorControl {
 
     private int listaColumna;
     private int listaBusqueda;
     
-    public LogicaVentanaBusquedaEliminacion() {
-        this.listaBusqueda = -1;
-        this.listaColumna = -1;
+    public EstadoVentanaBusquedaEliminacion() {
+        listaBusqueda = -1;
+        listaColumna = -1;
     }
     
     @Override
-    public void notificar(String accion, String valor) {
-        switch(accion) {
-            case "Busqueda" -> seleccionBusqueda(valor);
-            case "Columna" -> seleccionColumna(valor);
-            default -> System.out.println("ERROR");
-        }
+    public void notificarCambio(String entidadCambiar, String valor) {
+        if("Busqueda".equals(entidadCambiar))   { seleccionBusqueda(valor); }
+        if("Columna".equals(entidadCambiar))    { seleccionColumna(valor); }
     }
     
     @Override
-    public int obtenerEstado(String accion) {
-        return switch(accion) {
+    public int obtenerEstado(String estadoActual) {
+        return switch(estadoActual) {
             case "Busqueda" -> getListaBusqueda();
             case "Columna" -> getListaColumna();
             default -> -1;

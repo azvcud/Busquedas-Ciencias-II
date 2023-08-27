@@ -12,13 +12,13 @@ import javax.swing.JOptionPane;
  */
 public class Vista {
     public VentanaPrincipal ventanaInicio;
-    public VentanaInsertar ventanaFormulario;
-    public VentanaBusquedaEliminacion ventanaGestion;
+    public VentanaInsertar ventanaInsertar;
+    public VentanaBusquedaEliminacion ventanaBusquedaEliminacion;
     
     public Vista() {
-        ventanaInicio = new VentanaPrincipal();
-        ventanaFormulario = new VentanaInsertar();
-        ventanaGestion = new VentanaBusquedaEliminacion();
+        this.ventanaInicio = new VentanaPrincipal();
+        this.ventanaInsertar = new VentanaInsertar();
+        this.ventanaBusquedaEliminacion = new VentanaBusquedaEliminacion();
     }    
     
     public void mensajeError(String textoPantalla) {

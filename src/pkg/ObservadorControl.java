@@ -9,6 +9,6 @@ package pkg;
  * @author amirz
  */
 public interface ObservadorControl {
-    public void notificar(String accion, String valor);
+    public void notificarCambio(String accion, String valor);
     public int obtenerEstado(String accion);
 }

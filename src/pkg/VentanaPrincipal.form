@@ -47,7 +47,7 @@
                                   <Group type="102" alignment="1" attributes="0">
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="selectorColumna" min="-2" pref="364" max="-2" attributes="0"/>
+                                          <Component id="cbColumnaOrdenar" min="-2" pref="364" max="-2" attributes="0"/>
                                           <Group type="102" attributes="0">
                                               <Component id="btnOrdenamientoBurst" min="-2" pref="181" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
@@ -76,7 +76,7 @@
               <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="selectorColumna" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbColumnaOrdenar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -184,7 +184,7 @@
         <Property name="text" type="java.lang.String" value="Columna a ordenar:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="selectorColumna">
+    <Component class="javax.swing.JComboBox" name="cbColumnaOrdenar">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
