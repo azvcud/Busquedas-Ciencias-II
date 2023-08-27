@@ -66,6 +66,7 @@ public class Control implements ActionListener {
         if(e.getSource() == this.vista.ventanaGestion.cbBusqueda) { cbBusqueda(); }
         if(e.getSource() == this.vista.ventanaGestion.cbColumna) { cbColumna(); }
         if(e.getSource() == this.vista.ventanaGestion.btnBuscar) { btnBuscar(); }
+        if(e.getSource() == this.vista.ventanaGestion.btnEliminar) { btnEliminar(); }
         
         if(e.getSource() == this.vista.ventanaFormulario.btnInsertar) { btnInsertar(); }
     }
@@ -107,7 +108,6 @@ public class Control implements ActionListener {
         String columna = "Columna";
             
         ventanaBusquedaEliminacion.notificar(columna, columnaSeleccionada);
-        modelo.cambiarEstrategiaBusqueda(ventanaBusquedaEliminacion.obtenerEstado(columna));
     }
     
     
@@ -144,8 +144,8 @@ public class Control implements ActionListener {
             if(nombre.isBlank() || descripcion.isBlank()) { vista.mensajeError("Algún campo está vacío."); }
             else { 
                 modelo.insertarProducto(nombre, descripcion, precio); 
-                    
-                this.vista.ventanaFormulario.setVisible(false);
+         
+                this.vista.ventanaFormulario.dispose();
             
                 this.vista.ventanaFormulario.campoDescripcion.setText("");
                 this.vista.ventanaFormulario.campoNombre.setText("");
@@ -176,5 +176,37 @@ public class Control implements ActionListener {
                             this.vista.ventanaGestion.tfValor.getText())
             ));
         }
+    }
+    
+    
+    private void btnEliminar() {
+        int[] filaSeleccionada = this.vista.ventanaGestion.tablaBusqueda.getSelectedRows();
+        
+        String claveSeleccionada;
+        DefaultTableModel auxiliar;
+        
+        if(filaSeleccionada.length == 1) {
+            claveSeleccionada = Integer.toString((int) this.vista.ventanaGestion.tablaBusqueda.getValueAt(filaSeleccionada[0], 0));
+            
+            modelo.eliminarProducto(claveSeleccionada);
+            auxiliar = (DefaultTableModel) this.vista.ventanaGestion.tablaBusqueda.getModel();
+            auxiliar.removeRow(0);
+        }
+        else {
+            modelo.eliminarProductos(
+                    ventanaBusquedaEliminacion.obtenerEstado("Columna"), 
+                    (String) this.vista.ventanaGestion.tfValor.getText()
+            );
+            
+            auxiliar = (DefaultTableModel) this.vista.ventanaGestion.tablaBusqueda.getModel();
+            for(int i = 0; i < filaSeleccionada.length; i++) {
+                auxiliar.removeRow(0);
+            }
+        }
+        
+        this.vista.ventanaGestion.tablaBusqueda.setModel(auxiliar);
+        this.vista.ventanaInicio.tablaProductos.setModel(cargarTablaBusqueda(
+                        modelo.enviarListaProductos()
+            ));
     }
 }

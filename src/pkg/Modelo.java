@@ -82,4 +82,12 @@ public class Modelo {
     public void insertarProducto(String nombre, String descripcion, int precio) {
        tiendaProductos.insertarProducto(new Producto(nombre, descripcion, precio));
     }
+    
+    public void eliminarProducto(String clave) {
+        tiendaProductos.eliminarProducto(clave);
+    }
+    
+    public void eliminarProductos(int opcion, String atributo) {
+        tiendaProductos.eliminarProductos(opcion, atributo);
+    }
 }
