@@ -41,6 +41,7 @@ public class Control implements ActionListener {
         
         this.vista.ventanaBusquedaEliminacion.btnBuscar.addActionListener(this);
         this.vista.ventanaBusquedaEliminacion.btnEliminar.addActionListener(this);
+        this.vista.ventanaBusquedaEliminacion.btnEliminarTodo.addActionListener(this);
         this.vista.ventanaBusquedaEliminacion.cbBusqueda.addActionListener(this);
         this.vista.ventanaBusquedaEliminacion.cbColumnaBuscar.addActionListener(this);
     }
@@ -67,6 +68,7 @@ public class Control implements ActionListener {
         if(e.getSource() == vista.ventanaBusquedaEliminacion.cbColumnaBuscar) { cbColumnaBuscar(); }
         if(e.getSource() == vista.ventanaBusquedaEliminacion.btnBuscar) { btnBuscar(); }
         if(e.getSource() == vista.ventanaBusquedaEliminacion.btnEliminar) { btnEliminar(); }
+        if(e.getSource() == vista.ventanaBusquedaEliminacion.btnEliminarTodo) { btnEliminarTodo(); }
         
         if(e.getSource() == vista.ventanaInsertar.btnInsertar) { btnInsertar(); }
     }
@@ -173,6 +175,12 @@ public class Control implements ActionListener {
                 estadoBusquedaEliminacion.obtenerEstado("Busqueda") == 3 &&
                 estadoInicio.obtenerEstado("Ordenamiento") != 2;
         
+        boolean busquedaSinSoporte = 
+                estadoBusquedaEliminacion.obtenerEstado("Columna") == 3 &&
+                (
+                    estadoBusquedaEliminacion.obtenerEstado("Busqueda") == 2 ||
+                    estadoBusquedaEliminacion.obtenerEstado("Busqueda") == 3
+                );
         
         boolean valorEnBlanco = vista.ventanaBusquedaEliminacion.tfValor.getText().isBlank();
      
@@ -180,6 +188,7 @@ public class Control implements ActionListener {
         else if(valorEnBlanco)                 { vista.mensajeError("No se ha digitado valor a buscar"); }
         else if(validarBinaria)                { vista.mensajeError("Para usar búsqueda binaria, primero ordene con BurstSort."); }
         else if(validarTransformacionClaves)   { vista.mensajeError("Para usar búsqueda por transformación de claves, primero ordene con Tabla Hash"); }
+        else if(busquedaSinSoporte)            { vista.mensajeError("La búsqueda por descripción es sólo soportada por la búsqueda secuencial"); }
         else 
         {
             vista.ventanaBusquedaEliminacion.tablaBusqueda.setModel(
@@ -193,35 +202,37 @@ public class Control implements ActionListener {
     
     
     private void btnEliminar() {
-        int[] filaSeleccionada = vista.ventanaBusquedaEliminacion.tablaBusqueda.getSelectedRows();
+        int filaSeleccionada = vista.ventanaBusquedaEliminacion.tablaBusqueda.getSelectedRow();
         
         String claveSeleccionada;
         DefaultTableModel auxiliar;
         
-        if(filaSeleccionada.length == 1) 
-        {
-            claveSeleccionada = Integer.toString((int) vista.ventanaBusquedaEliminacion.tablaBusqueda.getValueAt(
-                filaSeleccionada[0], 
-                0
-            ));
+        claveSeleccionada = Integer.toString((int) vista.ventanaBusquedaEliminacion.tablaBusqueda.getValueAt(
+             filaSeleccionada, 
+             0
+        ));
             
-            modelo.eliminarProducto(claveSeleccionada);
-            auxiliar = (DefaultTableModel) vista.ventanaBusquedaEliminacion.tablaBusqueda.getModel();
-            auxiliar.removeRow(0);
-        }
-        else 
-        {
-            modelo.eliminarProductos(
-                estadoBusquedaEliminacion.obtenerEstado("Columna"), 
-                (String) vista.ventanaBusquedaEliminacion.tfValor.getText()
-            );
-            
-            auxiliar = (DefaultTableModel) vista.ventanaBusquedaEliminacion.tablaBusqueda.getModel();
-            for(int i = 0; i < filaSeleccionada.length; i++) {
-                auxiliar.removeRow(0);
-            }
-        }
+        modelo.eliminarProducto(claveSeleccionada);
+        auxiliar = (DefaultTableModel) vista.ventanaBusquedaEliminacion.tablaBusqueda.getModel();
+        auxiliar.removeRow(filaSeleccionada);
+
+        vista.ventanaBusquedaEliminacion.tablaBusqueda.setModel(auxiliar);
+        vista.ventanaInicio.tablaProductos.setModel(
+            cargarTablaBusqueda(modelo.enviarListaProductos())
+        );
+    }
+    
+    private void btnEliminarTodo() {
+        DefaultTableModel auxiliar; 
+        auxiliar = (DefaultTableModel) vista.ventanaBusquedaEliminacion.tablaBusqueda.getModel();
         
+        while(auxiliar.getRowCount() > 0) { auxiliar.removeRow(0); }
+        
+        modelo.eliminarProductos(
+            estadoBusquedaEliminacion.obtenerEstado("Columna"), 
+            (String) vista.ventanaBusquedaEliminacion.tfValor.getText()
+        );
+            
         vista.ventanaBusquedaEliminacion.tablaBusqueda.setModel(auxiliar);
         vista.ventanaInicio.tablaProductos.setModel(
             cargarTablaBusqueda(modelo.enviarListaProductos())
