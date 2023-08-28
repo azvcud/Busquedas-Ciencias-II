@@ -22,7 +22,7 @@ public class Archivo {
         int i = 0;
 
         
-        String archivoCSV = "C:\\Users\\amirz\\OneDrive\\Documentos\\GitHub\\Ciencias II - Búsquedas\\Busquedas-Ciencias-II\\datos_ficticios2.csv";
+        String archivoCSV = "../Busquedas-Ciencias-II/datos_ficticios.csv";
         
         try (BufferedReader lector = new BufferedReader(new FileReader(archivoCSV))) {
             String lineaTexto;
