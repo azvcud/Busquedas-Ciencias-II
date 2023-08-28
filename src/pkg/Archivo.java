@@ -20,14 +20,23 @@ public class Archivo {
         ArrayList<Producto> listaProductos = new ArrayList<>();
         Producto auxiliar;
         int i = 0;
+<<<<<<< Updated upstream
         
         String archivoCSV = "C:\\Users\\amirz\\OneDrive\\Documentos\\GitHub\\Ciencias II - Búsquedas\\Busquedas-Ciencias-II\\datos_ficticios2.csv";
+=======
+           
+        String archivoCSV = "C:\\Users\\amirz\\OneDrive\\Documentos\\GitHub\\Ciencias II - Búsquedas\\Busquedas-Ciencias-II\\datos_ficticios.csv";
+>>>>>>> Stashed changes
 
         try (BufferedReader lector = new BufferedReader(new FileReader(archivoCSV))) {
             String lineaTexto;
             boolean primerLinea = true;  // Para omitir la primera línea (encabezados)
             
+<<<<<<< Updated upstream
             while ((lineaTexto = lector.readLine()) != null && i < 7000) {
+=======
+            while ((lineaTexto = lector.readLine()) != null && i < 5000) {
+>>>>>>> Stashed changes
                 if (primerLinea) {
                     primerLinea = false;
                     continue;  // Omitir la primera línea (encabezados)
