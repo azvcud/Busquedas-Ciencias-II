@@ -2,19 +2,30 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package pkg;
+package control.logica;
 
+import control.estrategias.BusquedaSecuencial;
+import control.estrategias.BusquedaTransformacionClaves;
+import control.estrategias.BusquedaBinaria;
+import control.estrategias.Busqueda;
+import control.estrategias.BurstSort;
+import modelo.Producto;
+import control.estrategias.TablaHash;
+import modelo.TiendaProductos;
+import vista.Vista;
+import modelo.Archivo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
+import control.estrategias.Ordenamiento;
 
 /**
  *
  * @author amirz
  */
-public class Control implements ActionListener {
+public class Controlador implements ActionListener {
 
     private static final String[] nombresColumnas = {"ID", "Nombre", "Descripción", "Precio"};
     
@@ -23,8 +34,8 @@ public class Control implements ActionListener {
     
     private Archivo listaProductos;
     
-    private ObservadorControl estadoInicio;
-    private ObservadorControl estadoBusquedaEliminacion;
+    private ObservadorControlador estadoInicio;
+    private ObservadorControlador estadoBusquedaEliminacion;
     
     private Ordenamiento hash; 
     private Ordenamiento burstSort;
@@ -32,7 +43,7 @@ public class Control implements ActionListener {
     private Busqueda binaria;
     private Busqueda transformacionClaves;
 
-    public Control(Vista vista, TiendaProductos modelo) {
+    public Controlador(Vista vista, TiendaProductos modelo) {
         hash = new TablaHash();
         burstSort = new BurstSort();
         

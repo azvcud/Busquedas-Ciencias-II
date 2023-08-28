@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package pkg;
+package control.logica;
 
 /**
  *
  * @author amirz
  */
-public class EstadoVentanaBusquedaEliminacion implements ObservadorControl {
+public class EstadoVentanaBusquedaEliminacion implements ObservadorControlador {
 
     private int listaColumna;
     private int listaBusqueda;

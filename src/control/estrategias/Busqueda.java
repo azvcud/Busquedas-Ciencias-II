@@ -2,13 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package pkg;
+package control.estrategias;
 
+import java.util.ArrayList;
+import modelo.Producto;
 /**
  *
  * @author amirz
  */
-public interface ObservadorControl {
-    public void notificarCambio(String accion, String valor);
-    public int obtenerEstado(String accion);
+public interface Busqueda {
+    public ArrayList<Producto> buscar(ArrayList<Producto> listaProductos, int opcion, String atributo);
 }

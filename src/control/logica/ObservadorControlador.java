@@ -2,14 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package pkg;
-
-import java.util.ArrayList;
+package control.logica;
 
 /**
  *
  * @author amirz
  */
-public interface Ordenamiento {
-    public ArrayList<Producto> ordenar(ArrayList<Producto> listaProductos, int opcion);
+public interface ObservadorControlador {
+    public void notificarCambio(String accion, String valor);
+    public int obtenerEstado(String accion);
 }
