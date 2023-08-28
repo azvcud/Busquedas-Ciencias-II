@@ -19,15 +19,15 @@ public class Archivo {
     public ArrayList<Producto> cargarArchivos() {
         ArrayList<Producto> listaProductos = new ArrayList<>();
         Producto auxiliar;
+        int i = 0;
         
-        //String archivoCSV = "C:\\Users\\Shiro\\Desktop\\Ciencias ll\\Busquedas-Ciencias-II\\datos_ficticios2.csv";
-        String archivoCSV = "C:\\Users\\amirz\\OneDrive\\Documentos\\GitHub\\Ciencias II - Búsquedas\\Busquedas-Ciencias-II\\datos_ficticios.csv";
+        String archivoCSV = "C:\\Users\\amirz\\OneDrive\\Documentos\\GitHub\\Ciencias II - Búsquedas\\Busquedas-Ciencias-II\\datos_ficticios2.csv";
 
         try (BufferedReader lector = new BufferedReader(new FileReader(archivoCSV))) {
             String lineaTexto;
             boolean primerLinea = true;  // Para omitir la primera línea (encabezados)
             
-            while ((lineaTexto = lector.readLine()) != null) {
+            while ((lineaTexto = lector.readLine()) != null && i < 7000) {
                 if (primerLinea) {
                     primerLinea = false;
                     continue;  // Omitir la primera línea (encabezados)
@@ -41,6 +41,7 @@ public class Archivo {
                     auxiliar = new Producto(producto, descripcion, precio);
                     listaProductos.add(auxiliar);
                 }
+                i++;
             }
         } catch (IOException e) {
             e.printStackTrace();
