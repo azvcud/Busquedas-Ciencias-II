@@ -20,6 +20,7 @@ public class Archivo {
         ArrayList<Producto> listaProductos = new ArrayList<>();
         Producto auxiliar;
         
+        //String archivoCSV = "C:\\Users\\Shiro\\Desktop\\Ciencias ll\\Busquedas-Ciencias-II\\datos_ficticios2.csv";
         String archivoCSV = "C:\\Users\\amirz\\OneDrive\\Documentos\\GitHub\\Ciencias II - Búsquedas\\Busquedas-Ciencias-II\\datos_ficticios.csv";
 
         try (BufferedReader lector = new BufferedReader(new FileReader(archivoCSV))) {
