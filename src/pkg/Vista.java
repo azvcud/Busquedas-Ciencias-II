@@ -24,4 +24,8 @@ public class Vista {
     public void mensajeError(String textoPantalla) {
         JOptionPane.showMessageDialog(null, textoPantalla, "Error", JOptionPane.ERROR_MESSAGE);
     }
+    
+    public void mensajeInformacion(String textoPantalla) {
+        JOptionPane.showMessageDialog(null, textoPantalla, "Error", JOptionPane.INFORMATION_MESSAGE);
+    }
 }

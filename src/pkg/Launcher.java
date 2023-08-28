@@ -14,7 +14,7 @@ public class Launcher {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Modelo modelo = new Modelo();
+        TiendaProductos modelo = new TiendaProductos();
         Vista vista = new Vista();
         
         Control control = new Control(vista, modelo);

@@ -16,17 +16,34 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Control implements ActionListener {
 
-    private Vista vista;
-    private Modelo modelo;
-    
     private static final String[] nombresColumnas = {"ID", "Nombre", "Descripción", "Precio"};
+    
+    private Vista vista;
+    private TiendaProductos modelo;
+    
+    private Archivo listaProductos;
     
     private ObservadorControl estadoInicio;
     private ObservadorControl estadoBusquedaEliminacion;
+    
+    private Ordenamiento hash; 
+    private Ordenamiento burstSort;
+    private Busqueda secuencial;
+    private Busqueda binaria;
+    private Busqueda transformacionClaves;
 
-    public Control(Vista vista, Modelo modelo) {
+    public Control(Vista vista, TiendaProductos modelo) {
+        hash = new TablaHash();
+        burstSort = new BurstSort();
+        
+        secuencial = new BusquedaSecuencial();
+        binaria = new BusquedaBinaria();
+        transformacionClaves = new BusquedaTransformacionClaves();
+        
         estadoInicio = new EstadoVentanaPrincipal();
         estadoBusquedaEliminacion = new EstadoVentanaBusquedaEliminacion();
+        
+        listaProductos = new Archivo();
         
         this.vista = vista;
         this.modelo = modelo;
@@ -47,12 +64,13 @@ public class Control implements ActionListener {
     }
     
     public void iniciar() {
+        cargarArchivo();
         vista.ventanaInicio.setLocationRelativeTo(null);
         
         vista.ventanaInsertar.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         vista.ventanaBusquedaEliminacion.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        
-        vista.ventanaInicio.tablaProductos.setModel(cargarTablaBusqueda(modelo.enviarListaProductos()));
+       
+        vista.ventanaInicio.tablaProductos.setModel(cargarTablaBusqueda(modelo.getProductosAplicacion()));
         vista.ventanaInicio.setVisible(true);
     }
     
@@ -73,21 +91,6 @@ public class Control implements ActionListener {
         if(e.getSource() == vista.ventanaInsertar.btnInsertar) { btnInsertar(); }
     }
 
-    private DefaultTableModel cargarTablaBusqueda(ArrayList<Producto> listaProductos) {
-        DefaultTableModel modeloTabla = new DefaultTableModel(nombresColumnas, 0);
-        
-        for(Producto producto: listaProductos) {
-                    modeloTabla.addRow(new Object[]{
-                        producto.getId(), 
-                        producto.getNombre(),
-                        producto.getDescripcion(),
-                        producto.getPrecio()
-                    });
-        }
-        
-        return modeloTabla;
-    }
-    
     private void cbColumnaOrdenar() {
         String columnaSeleccionada = (String) vista.ventanaInicio.cbColumnaOrdenar.getSelectedItem();      
         estadoInicio.notificarCambio("Columna", columnaSeleccionada);
@@ -98,7 +101,7 @@ public class Control implements ActionListener {
         String itemSeleccionado = (String) vista.ventanaBusquedaEliminacion.cbBusqueda.getSelectedItem();
         
         estadoBusquedaEliminacion.notificarCambio("Busqueda", itemSeleccionado);
-        modelo.cambiarEstrategiaBusqueda(estadoBusquedaEliminacion.obtenerEstado("Busqueda"));
+        cambiarEstrategiaBusqueda(estadoBusquedaEliminacion.obtenerEstado("Busqueda"));
     }
     
     
@@ -112,11 +115,12 @@ public class Control implements ActionListener {
         if(estadoInicio.obtenerEstado("Columna") == -1) {
             vista.mensajeError("No se ha seleccionado ordenamiento");
         } else {
-            modelo.cambiarEstrategiaOrdenamiento(1, estadoInicio.obtenerEstado("Columna"));
+            cambiarEstrategiaOrdenamiento(1);
+            modelo.ordenarProductos(estadoInicio.obtenerEstado("Columna"));
             estadoInicio.notificarCambio("Ordenamiento", "BurstSort");
             
             vista.ventanaInicio.tablaProductos.setModel(cargarTablaBusqueda(
-                modelo.enviarListaProductos()
+                modelo.getProductosAplicacion()
             ));
         }
     }
@@ -127,11 +131,12 @@ public class Control implements ActionListener {
             case -1 -> vista.mensajeError("No se ha seleccionado ordenamiento");
             case 3 -> vista.mensajeError("No existe soporte de Hashing para la columna seleccionada.");
             default -> {
-                modelo.cambiarEstrategiaOrdenamiento(2, estadoInicio.obtenerEstado("Columna"));
+                cambiarEstrategiaOrdenamiento(2);
+                modelo.ordenarProductos(estadoInicio.obtenerEstado("Columna"));
                 estadoInicio.notificarCambio("Ordenamiento", "Tabla Hash");
                 
                 vista.ventanaInicio.tablaProductos.setModel(cargarTablaBusqueda(
-                    modelo.enviarListaProductos()
+                    modelo.getProductosAplicacion()
                 ));
             }
         }
@@ -149,12 +154,13 @@ public class Control implements ActionListener {
             if(camposVacios) { vista.mensajeError("Algún campo está vacío."); }
             else 
             { 
-                modelo.insertarProducto(nombre, descripcion, precio);          
+                modelo.insertarProducto(new Producto(nombre, descripcion, precio));          
                 vista.ventanaInsertar.dispose();
                 limpiarVentanaInsertar();
             
                 vista.ventanaInicio.tablaProductos.setModel(cargarTablaBusqueda(
-                    modelo.enviarListaProductos()));
+                    modelo.getProductosAplicacion()
+                ));
             }
         } catch (NumberFormatException nfe) {
             vista.mensajeError("El precio ingresado es inválido.");
@@ -168,12 +174,18 @@ public class Control implements ActionListener {
                 estadoBusquedaEliminacion.obtenerEstado("Columna") == -1;
         
         boolean validarBinaria = 
-                estadoBusquedaEliminacion.obtenerEstado("Busqueda") == 2 && 
-                estadoInicio.obtenerEstado("Ordenamiento") != 1;
+                estadoInicio.obtenerEstado("Ordenamiento") == 1 && 
+                (
+                        estadoInicio.obtenerEstado("Columna") ==
+                        estadoBusquedaEliminacion.obtenerEstado("Columna")
+                );
         
         boolean validarTransformacionClaves = 
-                estadoBusquedaEliminacion.obtenerEstado("Busqueda") == 3 &&
-                estadoInicio.obtenerEstado("Ordenamiento") != 2;
+                estadoInicio.obtenerEstado("Ordenamiento") == 2 && 
+                (
+                        estadoInicio.obtenerEstado("Columna") ==
+                        estadoBusquedaEliminacion.obtenerEstado("Columna")
+                );
         
         boolean busquedaSinSoporte = 
                 estadoBusquedaEliminacion.obtenerEstado("Columna") == 3 &&
@@ -182,30 +194,48 @@ public class Control implements ActionListener {
                     estadoBusquedaEliminacion.obtenerEstado("Busqueda") == 3
                 );
         
+        boolean esBinaria = estadoBusquedaEliminacion.obtenerEstado("Busqueda") == 2;
+        boolean esTransformacionClaves = estadoBusquedaEliminacion.obtenerEstado("Busqueda") == 3;
         boolean valorEnBlanco = vista.ventanaBusquedaEliminacion.tfValor.getText().isBlank();
      
-        if(seleccionesVacias)                  { vista.mensajeError("No se ha seleccionado búsqueda o columna"); }    
-        else if(valorEnBlanco)                 { vista.mensajeError("No se ha digitado valor a buscar"); }
-        else if(validarBinaria)                { vista.mensajeError("Para usar búsqueda binaria, primero ordene con BurstSort."); }
-        else if(validarTransformacionClaves)   { vista.mensajeError("Para usar búsqueda por transformación de claves, primero ordene con Tabla Hash"); }
-        else if(busquedaSinSoporte)            { vista.mensajeError("La búsqueda por descripción es sólo soportada por la búsqueda secuencial"); }
+        if(seleccionesVacias)                   { vista.mensajeError("No se ha seleccionado búsqueda o columna"); }    
+        else if(valorEnBlanco)                  { vista.mensajeError("No se ha digitado valor a buscar"); }
+        else if(busquedaSinSoporte)             { vista.mensajeError("La búsqueda por descripción es sólo soportada por la búsqueda secuencial"); }
+        else if(esBinaria && !validarBinaria)   { vista.mensajeError("Para usar esta búsqueda, ordene primero con BurstSort la columna a buscar."); }
+        
+        else if(esTransformacionClaves && !validarTransformacionClaves) 
+        { vista.mensajeError("Para usar esta búsqueda, ordene primero con Tabla Hash la columna a buscar."); }
+        
         else 
         {
+            long tiempoInicial = System.nanoTime();
             vista.ventanaBusquedaEliminacion.tablaBusqueda.setModel(
-                cargarTablaBusqueda(modelo.buscarProductos(
+                cargarTablaBusqueda(modelo.buscarProductos
+                    (
                     estadoBusquedaEliminacion.obtenerEstado("Columna"), 
-                    vista.ventanaBusquedaEliminacion.tfValor.getText())
+                    vista.ventanaBusquedaEliminacion.tfValor.getText()
+                    )
                 )
             );
+            long tiempoFinal = System.nanoTime();
+            long duracion = (tiempoFinal - tiempoInicial);
+            System.out.println(duracion);
+            
+            this.vista.ventanaBusquedaEliminacion.tfTiempo.setText(Long.toString(duracion) + " ns");
+            if(vista.ventanaBusquedaEliminacion.tablaBusqueda.getModel().getRowCount() == 0) 
+            { vista.mensajeInformacion("No se encontró ningún valor en la lista de productos.");  }
         }
     }
     
     
     private void btnEliminar() {
         int filaSeleccionada = vista.ventanaBusquedaEliminacion.tablaBusqueda.getSelectedRow();
-        
+        int auxBusqueda = estadoBusquedaEliminacion.obtenerEstado("Busqueda");
+       
         String claveSeleccionada;
         DefaultTableModel auxiliar;
+        
+        modelo.setEstrategiaBusqueda(secuencial);
         
         claveSeleccionada = Integer.toString((int) vista.ventanaBusquedaEliminacion.tablaBusqueda.getValueAt(
              filaSeleccionada, 
@@ -218,11 +248,17 @@ public class Control implements ActionListener {
 
         vista.ventanaBusquedaEliminacion.tablaBusqueda.setModel(auxiliar);
         vista.ventanaInicio.tablaProductos.setModel(
-            cargarTablaBusqueda(modelo.enviarListaProductos())
+            cargarTablaBusqueda(modelo.getProductosAplicacion())
         );
+        
+        cambiarEstrategiaBusqueda(auxBusqueda);
     }
     
     private void btnEliminarTodo() {
+        int auxBusqueda = estadoBusquedaEliminacion.obtenerEstado("Busqueda");
+        
+        modelo.setEstrategiaBusqueda(secuencial);
+        
         DefaultTableModel auxiliar; 
         auxiliar = (DefaultTableModel) vista.ventanaBusquedaEliminacion.tablaBusqueda.getModel();
         
@@ -235,13 +271,51 @@ public class Control implements ActionListener {
             
         vista.ventanaBusquedaEliminacion.tablaBusqueda.setModel(auxiliar);
         vista.ventanaInicio.tablaProductos.setModel(
-            cargarTablaBusqueda(modelo.enviarListaProductos())
+            cargarTablaBusqueda(modelo.getProductosAplicacion())
         );
+        
+        cambiarEstrategiaBusqueda(auxBusqueda);
+    }
+    
+    private DefaultTableModel cargarTablaBusqueda(ArrayList<Producto> listaProductos) {
+        DefaultTableModel modeloTabla = new DefaultTableModel(nombresColumnas, 0);
+        
+        for(Producto producto: listaProductos) {
+                    modeloTabla.addRow(new Object[]{
+                        producto.getId(), 
+                        producto.getNombre(),
+                        producto.getDescripcion(),
+                        producto.getPrecio()
+                    });
+        }
+        
+        return modeloTabla;
     }
     
     private void limpiarVentanaInsertar() {
         vista.ventanaInsertar.campoDescripcion.setText("");
         vista.ventanaInsertar.campoNombre.setText("");
         vista.ventanaInsertar.campoPrecio.setText("");
+    }
+    
+    private void cambiarEstrategiaBusqueda(int columnaOrden) {
+        switch(columnaOrden) {
+            case 1 -> modelo.setEstrategiaBusqueda(secuencial);
+            case 2 -> modelo.setEstrategiaBusqueda(binaria);
+            case 3 -> modelo.setEstrategiaBusqueda(transformacionClaves);
+            default -> modelo.setEstrategiaBusqueda(null);
+        }
+    }
+    
+    private void cambiarEstrategiaOrdenamiento(int opcion) {
+        switch(opcion) {
+            case 1 -> modelo.setEstrategiaOrdenamiento(burstSort);
+            case 2 -> modelo.setEstrategiaOrdenamiento(hash);
+            default -> modelo.setEstrategiaOrdenamiento(null);
+        }
+    }
+    
+    private void cargarArchivo() {
+        modelo.setProductosAplicacion(listaProductos.cargarArchivos());
     }
 }

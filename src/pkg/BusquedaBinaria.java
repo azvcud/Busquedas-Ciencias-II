@@ -17,10 +17,10 @@ public class BusquedaBinaria implements Busqueda {
     public ArrayList<Producto> buscar(ArrayList<Producto> listaProductos, int opcion, String atributo) {
         ArrayList<Producto> productosEncontrados = new ArrayList<>();
         Producto productoSeleccionado = null;
+        
         int izquierda = 0;
         int derecha = listaProductos.size()-1;
         int mitad;
-        
         
         while(izquierda <= derecha) {
             mitad = ((izquierda + derecha) / 2);
@@ -35,7 +35,7 @@ public class BusquedaBinaria implements Busqueda {
             }
         }
         
-        return null;
+        return productosEncontrados;
     }
     
     private boolean compararMenor(Producto productoSeleccionado, int opcion, String atributo) {
